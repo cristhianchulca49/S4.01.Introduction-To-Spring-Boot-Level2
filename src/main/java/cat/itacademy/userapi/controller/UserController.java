@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.lang.annotation.Repeatable;
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -36,5 +38,10 @@ public class UserController {
         return ResponseEntity
                 .created(location)
                 .body(user);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable UUID id){
+        return ResponseEntity.ok(service.getUserById(id));
     }
 }
