@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.lang.annotation.Repeatable;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -21,9 +20,10 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<User>> getUserList() {
-        return ResponseEntity.ok(service.getUsers());
+    @GetMapping()
+    public ResponseEntity<List<User>> getUsers(
+            @RequestParam(required = false) String name) {
+        return ResponseEntity.ok(service.getUsers(name));
     }
 
     @PostMapping
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable UUID id){
+    public ResponseEntity<User> getUserById(@PathVariable UUID id) {
         return ResponseEntity.ok(service.getUserById(id));
     }
 }

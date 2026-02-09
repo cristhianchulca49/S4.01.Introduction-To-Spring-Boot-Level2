@@ -13,8 +13,14 @@ import java.util.UUID;
 public class UserService {
     private final List<User> dataBase = new ArrayList<>();
 
-    public List<User> getUsers() {
-        return List.copyOf(dataBase);
+    public List<User> getUsers(String name) {
+        if (name == null || name.isBlank()) {
+            return List.copyOf(dataBase);
+        }
+        String query = name.toLowerCase();
+        return dataBase.stream()
+                .filter(u -> u.getName().toLowerCase().contains(query))
+                .toList();
     }
 
     public User createUser(UserDto userDto) {
