@@ -1,7 +1,9 @@
 package cat.itacademy.userapi.model;
 
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.UUID;
+@JsonPropertyOrder({ "id", "name", "email" })
 public class User {
     private UUID id;
     private String name;
@@ -14,4 +16,15 @@ public class User {
     }
 
 
+    public UUID getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
